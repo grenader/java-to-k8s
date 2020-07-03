@@ -58,6 +58,7 @@ workflows:
             branches:
               only: master
       - compose:
+          context: default
           requires:
             - build
           filters:
