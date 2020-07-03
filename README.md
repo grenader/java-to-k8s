@@ -56,8 +56,10 @@ The application will be exposed externally on port 88
 k get svc
 ```
 
-## View the application in a borwser:
+## View the application in a browser:
 http://lb-javak8s-scdc1-staging-grenader.svc-stage.eng.vmware.com:88/
+http://lb-javak8s-1-scdc1-staging-grenader.svc-stage.eng.vmware.com/
+
 
 
 
