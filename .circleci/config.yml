@@ -17,6 +17,6 @@ jobs:
       - checkout # check out the code in the project directory
       - run: echo "hello world. build start" # run the `echo` command
       - run: mvn clean package
-      - srun: echo "hello world. build finished" # run the `echo` command
+      - run: echo "hello world. build finished" # run the `echo` command
 
 
