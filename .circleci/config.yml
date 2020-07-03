@@ -10,6 +10,7 @@ jobs: # a collection of steps
           # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
           key: circleci-demo-java-spring-{{ checksum "pom.xml" }}
       - run: mvn dependency:go-offline # gets the project dependencies
+      - run: echo "$DOCKERHUB_USERNAME" # gets the project dependencies
       - save_cache: # saves the project dependencies
           paths:
             - ~/.m2
@@ -22,7 +23,6 @@ jobs: # a collection of steps
           # Upload test summary for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
           path: target/java-to-k8s-0.1.0.jar
       # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
-      - run: docker build -t grenader/java-to-k8s:latest .
   compose:
     environment:
       IMAGE_NAME: grenader/java-to-k8s
