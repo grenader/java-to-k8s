@@ -1,10 +1,22 @@
 version: 2.1
+#
+#orbs:
+#  maven: circleci/maven@0.0.12
+#
+#workflows:
+#  maven_test:
+#    jobs:
+#      - maven/clean # checkout, build, test, and upload test results
+#      - maven/package
 
-orbs:
-  maven: circleci/maven@0.0.12
+jobs:
+  build:
+    docker:
+      - image: circleci/node:4.8.2 # the primary container, where your job's commands are run
+    steps:
+      - checkout # check out the code in the project directory
+      - run: echo "hello world. build start" # run the `echo` command
+      - run: mvn clean package
+      - srun: echo "hello world. build finished" # run the `echo` command
 
-workflows:
-  maven_test:
-    jobs:
-      - maven/clean # checkout, build, test, and upload test results
-      - maven/package
+
