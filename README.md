@@ -60,6 +60,13 @@ k get svc
 http://lb-javak8s-scdc1-staging-grenader.svc-stage.eng.vmware.com:88/
 http://lb-javak8s-1-scdc1-staging-grenader.svc-stage.eng.vmware.com/
 
+# References
+
+- Original SpringBoot application with Docker compose: https://spring.io/guides/gs/spring-boot-docker/#scratch
+- Unit tests: https://spring.io/guides/gs/testing-web/
+- circleCi for Java: https://circleci.com/docs/2.0/hello-world/
+
+
 
 
 
