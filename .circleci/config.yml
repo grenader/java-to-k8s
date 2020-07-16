@@ -49,6 +49,8 @@ jobs: # a collection of steps
           docker push $IMAGE_NAME:latest
           #         docker push $IMAGE_NAME:$IMAGE_TAG
   deploy: # runs not using Workflows must have a `build` job as entry point
+    environment:
+      CONFIG_FILE: ~/tmp-kubectl-config
     docker: # run the steps with Docker
       - image: wecs/circle-ci-gcloud-node:0.1.0 #bitnami/kubectl
     steps: # a collection of executable commands
@@ -59,20 +61,20 @@ jobs: # a collection of steps
           command: echo $KUBE_CONFIG
       - run:
           name: Create kubernetes config file
-          command: echo "$KUBE_CONFIG" | base64 --decode > ~/tmp-kubectl-config
+          command: echo "$KUBE_CONFIG" | base64 --decode > $CONFIG_FILE
       - run:
           name: Print kubernetes config file
-          command: echo `cat ~/tmp-kubectl-config`
+          command: echo `cat $CONFIG_FILE`
       - run:
           name: Call kubectl to test
           command: |
-            echo `kubectl --kubeconfig ~/tmp-kubectl-config version` # run the actual tests
-            echo `kubectl --kubeconfig ~/tmp-kubectl-config config view` # run the actual tests
+            echo `kubectl --kubeconfig $CONFIG_FILE version` # run the actual tests
+            echo `kubectl --kubeconfig $CONFIG_FILE config view` # run the actual tests
       - run:
           name: deploy POD to k8s
           command: |
-            kubectl --kubeconfig ~/tmp-kubectl-confi run javak8sCD1 --image=grenader/java-to-k8s:latest --requests=cpu=0.2,memory=500Mi --limits=cpu=0.3,memory=600Mi --port=8080
-            kubectl --kubeconfig ~/tmp-kubectl-confi expose pod javak8sCD1 --port=80 --target-port=8080 --type=LoadBalancer --name=lb-javak8sCD1
+            kubectl --kubeconfig $CONFIG_FILE run javak8sCD1 --image=grenader/java-to-k8s:latest --requests=cpu=0.2,memory=500Mi --limits=cpu=0.3,memory=600Mi --port=8080
+            kubectl --kubeconfig $CONFIG_FILE expose pod javak8sCD1 --port=80 --target-port=8080 --type=LoadBalancer --name=lb-javak8sCD1
 
 workflows:
   version: 2
