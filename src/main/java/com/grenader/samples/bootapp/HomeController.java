@@ -9,7 +9,7 @@ public class HomeController {
 
     @RequestMapping("/")
     public @ResponseBody String greeting() {
-        return "Hey Kubernetes! This is Java";
+        return "Hey Kubernetes! This is Java deployed from CircleCI";
     }
 
 }
