@@ -6,13 +6,13 @@ jobs: # a collection of steps
       - image: wecs/circle-ci-gcloud-node:0.1.0 #bitnami/kubectl
     steps: # a collection of executable commands
       - run:
-          name: Pring kubernetes config file variable
+          name: Print kubernetes config file variable
           command: echo $KUBE_CONFIG
       - run:
           name: Create kubernetes config file
           command: echo "$KUBE_CONFIG" | base64 --decode > ~/tmp-kubectl-config
       - run:
-          name: Pring kubernetes config file
+          name: Print kubernetes config file
           command: echo `cat ~/tmp-kubectl-config`
       - run:
           name: Call kubectl
