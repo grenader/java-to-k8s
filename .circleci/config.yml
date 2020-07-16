@@ -54,10 +54,7 @@ workflows:
   build-master:
     jobs:
       - build:
-          filters:
       - compose:
           context: default
           requires:
             - build
-          filters:
-
