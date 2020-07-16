@@ -6,6 +6,9 @@ jobs: # a collection of steps
       - image: wecs/circle-ci-gcloud-node:0.1.0 #bitnami/kubectl
     steps: # a collection of executable commands
       - run:
+          name: Pring kubernetes config file variable
+          command: echo $KUBE_CONFIG
+      - run:
           name: Create kubernetes config file
           command: echo "$KUBE_CONFIG" > ~/tmp-config
       - run:
@@ -14,8 +17,7 @@ jobs: # a collection of steps
       - run:
           name: Call kubectl
           command: |
-            KUBECONFIG=~/tmp-config
-            echo `kubectl version` # run the actual tests
+            echo `kubectl --kubeconfig=~/tmp-config version` # run the actual tests
       - persist_to_workspace:
           root: .
           paths:
@@ -47,7 +49,8 @@ workflows:
   version: 2
   build-master:
     jobs:
-      - build
+      - build:
+          context: default
       - compose:
           context: default
           requires:
