@@ -73,7 +73,7 @@ jobs: # a collection of steps
       - run:
           name: deploy POD to k8s
           command: |
-            kubectl --kubeconfig ~/tmp-kubectl-config run javak8sCD1 --image=grenader/java-to-k8s:latest --requests=cpu=0.2,memory=500Mi --limits=cpu=0.3,memory=600Mi --port=8080
+            kubectl --kubeconfig ~/tmp-kubectl-config run --restart=Never javak8sCD1 --image=grenader/java-to-k8s:latest --requests=cpu=0.2,memory=500Mi --limits=cpu=0.3,memory=600Mi --port=8080
             kubectl --kubeconfig ~/tmp-kubectl-configE expose pod javak8sCD1 --port=80 --target-port=8080 --type=LoadBalancer --name=lb-javak8sCD1
 
 workflows:
