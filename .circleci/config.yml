@@ -10,15 +10,15 @@ jobs: # a collection of steps
           command: echo $KUBE_CONFIG
       - run:
           name: Create kubernetes config file
-          command: echo "$KUBE_CONFIG" > ~/tmp-config
+          command: echo "$KUBE_CONFIG" | base64 --decode > ~/tmp-kubectl-config
       - run:
           name: Pring kubernetes config file
-          command: echo `cat ~/tmp-config`
+          command: echo `cat ~/tmp-kubectl-config`
       - run:
           name: Call kubectl
           command: |
-            echo `kubectl --kubeconfig ~/tmp-config version` # run the actual tests
-            echo `kubectl --kubeconfig ~/tmp-config config view` # run the actual tests
+            echo `kubectl --kubeconfig ~/tmp-kubectl-config version` # run the actual tests
+            echo `kubectl --kubeconfig ~/tmp-kubectl-config config view` # run the actual tests
       - persist_to_workspace:
           root: .
           paths:

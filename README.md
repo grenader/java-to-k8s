@@ -68,6 +68,9 @@ http://lb-javak8s-1-scdc1-staging-grenader.svc-stage.eng.vmware.com/
 
 - Configure one kubectl client to access several K8s clusters: https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/
 
+- Using multi-line env. variables in CircleCI: https://circleci.com/docs/2.0/env-vars/?utm_medium=SEM&utm_source=gnb&utm_campaign=SEM-gb-DSA-Eng-ni&utm_content=&utm_term=dynamicSearch-&gclid=Cj0KCQjw9b_4BRCMARIsADMUIyo1RNzH2os-oOxhvTgYZb6CtXSEF5OzUi1HHQK4J8nnSTRplG8lC9saAqOQEALw_wcB
+
+
 ## Service account for CI/CD
 - Create a service account: https://stackoverflow.com/questions/48394610/connect-local-instance-of-kubectl-to-gke-cluster-without-using-gcloud-tool (the answer from Timur)
 - Get service account credentials into ./kube/config file: https://stackoverflow.com/questions/47770676/how-to-create-a-kubectl-config-file-for-serviceaccount
