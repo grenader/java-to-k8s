@@ -53,8 +53,9 @@ workflows:
   version: 2
   build-master:
     jobs:
-      - build:
+      - build
       - compose:
           context: default
           requires:
             - build
+
