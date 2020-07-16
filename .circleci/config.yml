@@ -52,9 +52,8 @@ jobs: # a collection of steps
     docker: # run the steps with Docker
       - image: wecs/circle-ci-gcloud-node:0.1.0 #bitnami/kubectl
     steps: # a collection of executable commands
-      - steps:
-          - attach_workspace:
-              at: .
+      - attach_workspace:
+          at: .
       - run:
           name: Print kubernetes config file variable
           command: echo $KUBE_CONFIG
