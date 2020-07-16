@@ -5,7 +5,11 @@ jobs: # a collection of steps
     docker: # run the steps with Docker
       - image: wecs/circle-ci-gcloud-node:0.1.0 #bitnami/kubectl
     steps: # a collection of executable commands
-      - run: echo `kubectl version` # run the actual tests
+      - run:
+        - echo "$KUBE_CONFIG" > ~/tmp-config
+        - cat ~/tmp-config
+        - KUBECONFIG=~/tmp-config
+        - echo `kubectl version` # run the actual tests
       - persist_to_workspace:
           root: .
           paths:
