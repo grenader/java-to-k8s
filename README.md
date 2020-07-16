@@ -66,6 +66,14 @@ http://lb-javak8s-1-scdc1-staging-grenader.svc-stage.eng.vmware.com/
 - Unit tests: https://spring.io/guides/gs/testing-web/
 - circleCi for Java: https://circleci.com/docs/2.0/hello-world/
 
+- Configure one kubectl client to access several K8s clusters: https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/
+
+## Service account for CI/CD
+- Create a service account: https://stackoverflow.com/questions/48394610/connect-local-instance-of-kubectl-to-gke-cluster-without-using-gcloud-tool (the answer from Timur)
+- Get service account credentials into ./kube/config file: https://stackoverflow.com/questions/47770676/how-to-create-a-kubectl-config-file-for-serviceaccount
+- And similar task described here: https://kubernetes.io/docs/tasks/access-application-cluster/access-cluster/
+- Similar task of getting credentials: https://docs.armory.io/docs/spinnaker-install-admin-guides/manual-service-account/
+ 
 
 
 
