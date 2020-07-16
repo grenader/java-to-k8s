@@ -48,11 +48,12 @@ jobs: # a collection of steps
           #          docker tag $IMAGE_NAME:latest $IMAGE_NAME:$IMAGE_TAG
           docker push $IMAGE_NAME:latest
           #         docker push $IMAGE_NAME:$IMAGE_TAG
-  deploy: # runs not using Workflows must have a `build` job as entry point
+  deploy: # deploy the application to kubernetes that is configured in $KUBE_CONFIG env. variable in the current
+          # CircleCI context
     environment:
-      CONFIG_FILE: ~/tmp-kubectl-config
+      CONFIG_FILE: ~/tmp-kubectl-config # a variable with a kubernetes config file create from the env. varaible content
     docker: # run the steps with Docker
-      - image: wecs/circle-ci-gcloud-node:0.1.0 #bitnami/kubectl
+      - image: wecs/circle-ci-gcloud-node:0.1.0 # using this outdates images, it should be something better
     steps: # a collection of executable commands
       - attach_workspace:
           at: .
@@ -75,7 +76,7 @@ jobs: # a collection of steps
           command: |
             kubectl --kubeconfig ~/tmp-kubectl-config run --restart=Never javak8scd2 --image=grenader/java-to-k8s:latest --requests=cpu=0.2,memory=500Mi --limits=cpu=0.3,memory=600Mi --port=8080
             kubectl --kubeconfig ~/tmp-kubectl-config expose pod javak8scd2 --port=80 --target-port=8080 --type=LoadBalancer --name=lb-javak8scd2
-
+# Next step will be fetching application EXTERNAL-IP and printing it.
 workflows:
   version: 2
   build-master:
